@@ -5,13 +5,22 @@ import SignOut from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 
 import styles from "./styles.module.css";
+import { AuthUserContext } from "../Session";
 
-const Navigation = () => (
-    <div>
+const Navigation = ({ authUser }) => {
+    return(
+        <div>
+            <AuthUserContext.Consumer>
+                { authUser => authUser ? <NavigationAuth/> : <NavigationNonAuth/> }
+            </AuthUserContext.Consumer>
+        </div>
+    )
+}
+
+
+const NavigationAuth = () => {
+    return(
         <ul>
-            <li>
-                <Link to={ROUTES.SIGN_IN}>Sign In</Link>   
-            </li>
             <li>
                 <Link to={ROUTES.LANDING}>Landing</Link>
             </li>
@@ -22,13 +31,23 @@ const Navigation = () => (
                 <Link to={ROUTES.ACCOUNT}>Account</Link>
             </li>
             <li>
-                <Link to={ROUTES.ADMIN}>Admin</Link>
-            </li>
-            <li>
                 <SignOut/>
             </li>
         </ul>
-    </div>
-);
+    )
+};
+
+const NavigationNonAuth = () => {
+    return(
+        <ul>
+            <li>
+                <Link to={ROUTES.LANDING}>Landing</Link>
+            </li>
+            <li>
+                <Link to={ROUTES.SIGN_IN}>Sign In</Link>   
+            </li>
+        </ul>
+    )
+}
 
 export default Navigation;

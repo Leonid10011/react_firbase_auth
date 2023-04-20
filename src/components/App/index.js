@@ -14,12 +14,15 @@ import Home from "../Home";
 import Account from "../Account";
 import Admin from "../Admin";
 
+import withAuthentication from "../Session/withAuthentication";
+
 import * as ROUTES from "../../constants/routes";
 
 import styles from "./styles.module.css";
 
-const App = () => (
-    <Router>
+const App = () => {
+    return (
+        <Router>
             <Navigation/>
             <hr/>
             <div className={styles.main}>
@@ -33,7 +36,8 @@ const App = () => (
                     <Route path={ROUTES.ADMIN} Component={Admin}/>       
                 </Routes>
             </div>
-    </Router>
-)
+        </Router>
+    )
+}
 
-export default App;
+export default withAuthentication(App);
