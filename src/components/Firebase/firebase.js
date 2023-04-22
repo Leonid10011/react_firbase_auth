@@ -1,6 +1,6 @@
 import 'firebase/auth';
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updatePassword } from "firebase/auth";
 import * as CREDS from "../../config";
 
 const firebaseConfig = {
@@ -37,10 +37,9 @@ class Firebase {
 
     doSignOut = () => this.auth.signOut();
 
-    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+    doPasswordReset = email => sendPasswordResetEmail(this.auth, email);
 
-    doPasswordUpdate = password => 
-      this.auth.currentUser.updatePassword(password);
+    doPasswordUpdate = password => updatePassword(this.auth.currentUser, password);
   }
 
 export default Firebase;
