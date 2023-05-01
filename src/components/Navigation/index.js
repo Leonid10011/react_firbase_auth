@@ -18,6 +18,7 @@ const Navigation = ({ authUser }) => {
 }
 
 
+
 const NavigationAuth = () => {
     return(
         <ul>
